@@ -57,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setAdapter(charactersAdapter);
+        getCharacters();
+    }
 
-
+    private void getCharacters() {
         apiService.getCharacterViewer(getString(R.string.query))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -85,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onError(Throwable e) {
                         dialog.dismiss();
                         e.printStackTrace();
+                        MaterialDialog.Builder builder = new MaterialDialog.Builder(MainActivity.this)
+                                .title(R.string.something_went_wrong)
+                                .positiveText(R.string.retry)
+                                .onPositive((dialog, which) -> getCharacters())
+                                .cancelable(false);
+                        dialog = builder.build();
+                        dialog.show();
                     }
                 });
     }
