@@ -49,4 +49,12 @@ public class RelatedTopic {
         this.icon = icon;
     }
 
+    public String getCharacterName() {
+        return text.split(" - ")[0];
+    }
+
+    public String getDescription() {
+        return text.split(" - ").length > 1 ? text.split(" - ")[1] : " ";
+    }
+
 }
