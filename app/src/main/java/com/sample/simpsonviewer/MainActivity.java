@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        charactersAdapter = new CharactersAdapter(relatedTopicList);
+        charactersAdapter = new CharactersAdapter(relatedTopicList, getResources().getBoolean(R.bool.isTablet));
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
